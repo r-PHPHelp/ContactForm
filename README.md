@@ -34,4 +34,5 @@ And that’s it! We have a reasonably complicated contact form!
 
 ## Todo:
 - info on setting up local/remote email server
-- More use cases?!
+- how to prevent cross site request forgery, CSRF tokens or stateless options
+- More use cases!
