@@ -23,9 +23,12 @@ class Form {
             'message' => 'trim|sanitize_string'
         ]);
         $data = $validator->run($data);
+        if ($data === false) {
+          throw new \Exception($validator->get_readable_errors(true));
+        }
         
-        $this->name  = $data["name"];
-        $this->email = $data["email"];
+        $this->name    = $data["name"];
+        $this->email   = $data["email"];
         $this->message = $data["message"];
         $this->deliver = "youremail@email.com";
         $this->subject = "New Message";
