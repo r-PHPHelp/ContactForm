@@ -16,7 +16,7 @@ $gump->filter_rules([
 ]);
 $data = $gump->run($data);
 if($data === false) {
-	echo $gump->get_readable_errors(true);
+   echo $gump->get_readable_errors(true);
 } else {
 
   $data = [
