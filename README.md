@@ -15,9 +15,11 @@ Now let's look at our "get.php" file. Everything we need is packed into one arra
 And that’s it! We have a working simple contact form!
 
 ## POST (simple)
-The second form will be a little more complicated, because our "boss" decided that we need to allow our users to upload a picture of themselves as well! We don’t need to email the picture right now, just upload it to our server and send its location via email.
+The second form will be a little more complicated, because our "boss" decided that we need to validate our user input, and allow our users to upload a picture of themselves as well! We don’t need to email the picture right now, just upload it to our server and send its location via email.
 
 Let's first review "post.html". The GET method is limited in what kind of data it can send, and now that we are dealing with files, we can no longer use it. So, we switch to the POST method and need to define a new encoding type. Without a file upload the default is fine, so you don’t always need to specify an enctype. We’ve also changed the action to our new php file.
+
+Regarding input validataion, there are times for "do it yourself”, and times for using a package. This is one of the latter. Keeping in mind that if you are using a framework (like Laravel) there is probably something built-in for you to use. Otherwise, introducing GUMP, a super popular github package that turns this headache waiting to happen into a much simpler task. You can and should use Composer to include packages, but for the sake of simplicity, let’s go ahead and download it from github and put it in a /GUMP-master/ subdirectory. You should review [GUMP](https://github.com/Wixel/GUMP)'s github page for details on which filters are available, etc.
 
 Reviewing the "post.php" file, we’ve added some fields to our $data array: the destination directory, and the $_FILES superglobal at the “file” key, as that’s the name we set for the file in the form. We pass those values to the aptly named move_uploaded_file() function.
 
@@ -26,9 +28,9 @@ And that’s it! We have a slightly more complicated contact form!
 ## POST + email attachments
 Our form will require even more work in its third iteration. After a few days of being in production, our web server’s hard drive is completely filled with images! So, now we need to change our process. We’ll upload, email, then delete the submitted photo. We don’t need to change the HTML form itself, so we’ll get right to working on the "attachment.php".
 
-There are times for "do it yourself”, and times for using a package. This is one of the latter. Introducing PHPMailer, a super popular github package that turns this headache waiting to happen into a much simpler task. You can and should use Composer to include packages, but for the sake of simplicity, let’s go ahead and download it from github and put it in a /phpmailer/ subdirectory. This is also a pretty good time to clean up our code a little bit.
+Introducing PHPMailer, another one of those 'let a package do it' situations. Let’s go ahead and download it from github and put it in a /phpmailer/ subdirectory. 
 
-We’ve cleaned our code up to a nice object oriented format, included PHPMailer & used it to attach our uploaded file to our email, finally deleting the file after sending the email.
+This was also a pretty good time to clean up our code a little bit. So, we’ve cleaned our code up to a nice object oriented format, included PHPMailer & used it to attach our uploaded file to our email, finally deleting the file after sending the email.
 
 And that’s it! We have a reasonably complicated contact form!
 
